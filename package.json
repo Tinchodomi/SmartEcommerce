@@ -1,0 +1,40 @@
+{
+  "type": "module",
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "connect-mongo": "^5.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
+    "handlebars": "^4.7.8",
+    "mongoose": "^7.5.0",
+    "mongoose-paginate-v2": "^1.7.31",
+    "multer": "^1.4.5-lts.1",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.7.2",
+    "sweetalert2": "^11.7.27"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "scripts": {
+    "dev89": "nodemon clase8y9/src/main.js",
+    "dev10": "nodemon clase10/src/main.js",
+    "dev11": "nodemon clase11/src/main.js",
+    "dev12": "nodemon clase12/src/index.js",
+    "dev13": "nodemon clase13/app.js",
+    "dev16": "nodemon clase16/app.js",
+    "dev17": "nodemon clase17/app.js",
+    "dev18": "nodemon clase18/app.js",
+    "dev19": "nodemon clase19/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
