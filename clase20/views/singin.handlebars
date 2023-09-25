@@ -1,0 +1,36 @@
+<h2 style="text-align: center;">Registro de usuario</h2>
+
+<form
+  action="/api/users"
+  method="post"
+  style="display: flex; flex-direction:column; padding:50px; "
+>
+  <input
+    type="text"
+    name="first_name"
+    id="first_name"
+    placeholder="Nombre"
+    style="padding:20px"
+  />
+  <input
+    type="text"
+    name="last_name"
+    id="last_name"
+    placeholder="Apellido"
+    style="padding:20px"
+  />
+  <input type="text" name="age"  placeholder="Edad" style="padding:20px" />
+  <input
+    type="email"
+    name="email"
+    placeholder="Email"
+    style="padding:20px"
+  />
+  <input
+    type="password"
+    name="password"
+    placeholder="Password"
+    style="padding:20px"
+  />
+  <button type="submit" style="padding:20px">Sing in</button>
+</form>

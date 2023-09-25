@@ -1,0 +1,15 @@
+<h2 style="text-align: center;">Products</h2>
+<div style="display: flex; justify-content:space-around">
+<h6 style="text-align: center; font-size:30px; "> Bienvenido {{info}}!  </h6>
+<button id="logoutButton">Logout</button>
+</div>
+{{#each products}}
+  <div style="display: flex; align-items:center; justify-content:space-around; border:1px solid black;margin:10px">
+    <h4 style="padding: 20px;">Product:</h4>
+    <p style="padding: 20px;">nombre:{{this.title}}</p>
+    <p style="padding: 20px;">description:{{this.description}}</p>
+    <p style="padding: 20px;">price:{{this.price}}</p>
+    <p style="padding: 20px;">stock: {{this.stock}}</p>
+    <p style="padding: 20px;">category:{{this.category}}</p>
+  </div>
+{{/each}}
