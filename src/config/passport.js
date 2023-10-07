@@ -3,13 +3,40 @@ import passport from "passport";
 import { createHash, validatePassword } from "../utils/bcrypt.js";
 import userModel from "../models/users.model.js";
 import GithubStrategy from "passport-github2";
+import jwt from "passport-jwt";
+import "dotenv/config";
+
 //defino la estrategia a utilizar
 
 const LocalStrategy = local.Strategy;
+const JWTstrategy = jwt.Strategy;
+const ExtractJWT = jwt.ExtractJwt;
 
 const initializePassport = () => {
-  passport.use(
-    "register",
+  
+  
+  const cookieExtractor = req => {
+    // console.log(req.cookies);
+    const token = req.cookies ? req.cookies.jwtCookie : {};
+    console.log(token);
+    return token;
+  };
+
+  passport.use("jwt",
+     new JWTstrategy(
+      {
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+        secretOrKey: process.env.JWT_SECRET
+      }, async(jwt_payload, done)=>{
+        try {
+          return(null, jwt_payload)
+        } catch (error) {
+          return done (error)
+        }
+      }
+  ));
+
+  passport.use("register",
     new LocalStrategy(
       {
         passReqToCallback: true,
@@ -39,10 +66,9 @@ const initializePassport = () => {
         }
       }
     )
-  ); //cierre de passport.use
+  ); 
 
-  passport.use(
-    "github",
+  passport.use("github",
     new GithubStrategy(
       {
         clientID: process.env.CLIENT_ID,
@@ -51,9 +77,9 @@ const initializePassport = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          console.log(accessToken)
-          console.log(refreshToken)
-          const user = await userModel.findOne({email:profile._json.email});
+          console.log(accessToken);
+          console.log(refreshToken);
+          const user = await userModel.findOne({ email: profile._json.email });
           if (user) {
             done(null, false);
           } else {
@@ -64,10 +90,10 @@ const initializePassport = () => {
               age: 18, //edad por defecto
               password: "password",
             });
-            done(Null, userCreate);
+            done(null, userCreate);
           }
         } catch (error) {
-          done(error);
+          return done(error);
         }
       }
     )
@@ -77,15 +103,13 @@ const initializePassport = () => {
   passport.serializeUser((user, done) => {
     done(null, user._id);
   });
-
   //cerrar sesion del usuario
   passport.deserializeUser(async (id, done) => {
     const user = await userModel.findById(id);
     done(null, user);
   });
 
-  passport.use(
-    "login",
+  passport.use("login",
     new LocalStrategy(
       { usernameField: "email" },
       async (email, password, done) => {

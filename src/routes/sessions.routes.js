@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import { passportError, authorization } from "../utils/errorMessg.js";
 
 const sessionRouter = Router();
 
@@ -35,7 +36,7 @@ sessionRouter.post(
 
     try {
       if (!req.user) {
-        return res.status(401).send({ mensaje: "user Invalido" });
+        return res.status(401).send({ mensaje: "User invalido" });
       }
 
       req.session.user = {
@@ -52,7 +53,9 @@ sessionRouter.post(
   }
 );
 
-sessionRouter.get("/logout", async (req, res) => {
+sessionRouter.get(
+  "/logout",
+  async (req, res) => {
   if (req.session.login) {
     req.session.destroy();
   }
@@ -60,13 +63,12 @@ sessionRouter.get("/logout", async (req, res) => {
   res.redirect("/login");
 });
 
+///github
 sessionRouter.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] }),
   async (req, res) => {
-
-    res.status(200).send({mensaje:'Usuario Creado'})
-
+    res.status(200).send({ mensaje: "Usuario Creado" });
   }
 );
 
@@ -74,6 +76,23 @@ sessionRouter.get(
   "/githubSessions",
   passport.authenticate("github"),
   async (req, res) => {}
+);
+
+sessionRouter.get(
+  "/testJWT",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    res.status(200).send({ mensaje: req.user });
+  }
+);
+
+sessionRouter.get(
+  "/current",
+  passportError("jwt"),
+  authorization("user"),
+  (req, res) => {
+    res.send(req.user);
+  }
 );
 
 export default sessionRouter;

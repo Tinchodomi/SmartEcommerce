@@ -101,8 +101,9 @@ app.get('/products', async (req, res) => {
 
 //listen server
 app.listen(PORT, () => {
-  console.log(`Server on port:${localhost}/singin `);
-  console.log(`Server on port:${localhost}/login `);
-  console.log(`Server on port:${localhost}/products `);
-  console.log(`Server on port:${localhost}/api/sessions/github `);
+  //console.log(`Server on port:${localhost}/singin `);
+  //console.log(`Server on port:${localhost}/login `);
+  //console.log(`Server on port:${localhost}/products `);
+  //console.log(`Server on port:${localhost}/api/sessions/github `);
+  console.log(`Server on port:${localhost}/api/sessions/current `);
 });

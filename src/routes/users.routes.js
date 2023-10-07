@@ -5,7 +5,8 @@ import passport from "passport";
 const userRouter = Router();
 
 userRouter.post("/",passport.authenticate('register') ,async (req, res) => {
- /*  const { first_name, last_name, email, password, rol, age } = req.body;
+ 
+  /*  const { first_name, last_name, email, password, rol, age } = req.body;
   let user;
   try {
     const hashPassword = createHash(password);
