@@ -25,21 +25,13 @@
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "scripts": {
-    "dev89": "nodemon clase8y9/src/main.js",
-    "dev10": "nodemon clase10/src/main.js",
-    "dev11": "nodemon clase11/src/main.js",
-    "dev12": "nodemon clase12/src/index.js",
-    "dev13": "nodemon clase13/app.js",
-    "dev16": "nodemon clase16/app.js",
-    "dev17": "nodemon clase17/app.js",
-    "dev18": "nodemon clase18/app.js",
-    "dev19": "nodemon clase19/app.js",
-    "dev20": "nodemon clase20/app.js"
+    
+    "dev": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "",
