@@ -17,10 +17,9 @@ const app = express();
 const PORT = 4000;
 const localhost = "http://localhost:4000";
 
-const MONGO_URL = "mongodb+srv://tinchodomi:Martin1991@cluster0.jghkycb.mongodb.net/SmartEcommerce"
-//mongoose
+
 mongoose
-  .connect(MONGO_URL)
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Mongo conectado");
   })

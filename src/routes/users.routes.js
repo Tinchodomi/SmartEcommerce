@@ -1,10 +1,16 @@
 import { Router } from "express";
 import passport from "passport";
+import { getUsers } from "../controllers/users.controller.js";
+import { postProduct } from "../controllers/product.controller.js";
 
 
 const userRouter = Router();
 
-userRouter.post("/",passport.authenticate('register') ,async (req, res) => {
+userRouter.get('/', getUsers)
+userRouter.post ('/',  passport.authenticate('register') , postProduct)
+
+
+/* userRouter.post("/", passport.authenticate('register') ,async (req, res) => {
  
   /*  const { first_name, last_name, email, password, rol, age } = req.body;
   let user;
@@ -33,7 +39,7 @@ userRouter.post("/",passport.authenticate('register') ,async (req, res) => {
     res.redirect("/login");
   } catch (error) {
     res.status(400).send({ error: `Error en crear usuario: ${error}` });
-  } */
+  } 
 
     try {
       if(!req.user){
@@ -46,5 +52,8 @@ userRouter.post("/",passport.authenticate('register') ,async (req, res) => {
 
 
 });
+ */
+
+
 
 export default userRouter;
