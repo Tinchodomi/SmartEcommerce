@@ -115,14 +115,16 @@ export const putProductInCart = async (req,res)=>{
 
   try {
     const cart = await cartModel.findById(cid);
-
+   
     if (cart) {
       
       const prod = cart.products.find(product => product.id_prod == pid)
+      
       if(prod){
         prod.quantity += quantity
       }else{
         res.status(400).send(`No se encontro el id del producto`)
+        return
       }
 
       await cart.save();
