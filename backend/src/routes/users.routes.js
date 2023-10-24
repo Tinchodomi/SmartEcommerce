@@ -1,13 +1,13 @@
 import { Router } from "express";
 import passport from "passport";
-import { getUsers } from "../controllers/users.controller.js";
-import { postProduct } from "../controllers/product.controller.js";
+import { getUsers, postUser } from "../controllers/users.controller.js";
+
 
 
 const userRouter = Router();
 
 userRouter.get('/', getUsers)
-userRouter.post ('/',  passport.authenticate('register') , postProduct)
+userRouter.post ('/',  passport.authenticate('register') , postUser)
 
 
 /* userRouter.post("/", passport.authenticate('register') ,async (req, res) => {
