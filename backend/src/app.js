@@ -5,6 +5,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import passport from "passport";
+import cors from 'cors'
 
 //imports de modulos
 import initializePassport from "./config/passport.js";
@@ -15,8 +16,20 @@ import router from "./routes/index.routes.js";
 //server
 const app = express();
 const PORT = 4000;
-const localhost = "http://localhost:4000";
+const localhost = "http://localhost:4000/api/products";
 
+const withelist = ['http://localhost:5173']
+const corsOptions = {
+  origin: function (origin, callback) {
+      if (withelist.indexOf(origin) != -1 || !origin) { //Existe dentro de whitelist
+          callback(null, true)
+      } else {
+          callback(new Error("Acceso denegado"))
+      }
+  }
+}
+
+app.use(cors(corsOptions))
 
 mongoose
   .connect(process.env.MONGO_URL)

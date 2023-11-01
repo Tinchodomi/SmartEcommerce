@@ -12,6 +12,8 @@ export const getUsers = async (req,res)=>{
 
 }
 
+
+
 export const postUser = async( req,res)=>{
 
     try {

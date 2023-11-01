@@ -3,12 +3,13 @@ import productModel from "../models/products.model.js";
 export const getProducts = async (req, res) => {
     const { limit, page, filter, sort } = req.query
 
+    const fil = filter ? filter : {}
     const pag = page ? page : 1
     const lim = limit ? limit : 10
     const ord = sort == 'asc' ? 1 : -1
-
+    console.log(fil)
     try {
-        const products = await productModel.paginate({ filter: filter }, { limit: lim, page: pag, sort: { price: ord } })
+        const products = await productModel.paginate({}, { limit: lim, page: pag, sort: { price: ord } })
 
         if (products) {
             return res.status(200).send(products)
@@ -21,6 +22,7 @@ export const getProducts = async (req, res) => {
     }
 
 }
+
 
 export const getProduct = async (req, res) => {
     const { id } = req.params
@@ -49,7 +51,7 @@ export const postProduct = async (req, res) => {
             return res.status(201).send(product)
         }
 
-        res.status(404).send({ error: "Producto no encontrado" })
+        return res.status(404).send({ error: "Producto no encontrado" })
 
     } catch (error) {
         if (error.code == 11000) {

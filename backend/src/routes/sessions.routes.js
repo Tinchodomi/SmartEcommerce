@@ -20,9 +20,21 @@ sessionRouter.post('/login', passport.authenticate('login'), async (req, res) =>
         res.cookie('jwtCookie', token, {
             maxAge: 43200000
         })
+        console.log(token)
         res.status(200).send({ payload: req.user })
     } catch (error) {
         res.status(500).send({ mensaje: `Error al iniciar sesion ${error}` })
+    }
+})
+
+sessionRouter.post('/register', passport.authenticate('register'), async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(400).send({ mensaje: 'Usuario ya existente' })
+        }
+        return res.status(200).send({ mensaje: 'Usuario creado' })
+    } catch (error) {
+        res.status(500).send({ mensaje: `Error al crear usuario ${error}` })
     }
 })
 
