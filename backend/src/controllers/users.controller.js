@@ -1,7 +1,5 @@
 import userModel from "../models/users.model.js";
 
-
-
 export const getUsers = async (req,res)=>{
 
     const users = await userModel.find()
@@ -11,7 +9,6 @@ export const getUsers = async (req,res)=>{
     }
 
 }
-
 
 
 export const postUser = async( req,res)=>{

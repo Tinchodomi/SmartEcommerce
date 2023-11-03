@@ -16,7 +16,7 @@ import router from "./routes/index.routes.js";
 //server
 const app = express();
 const PORT = 4000;
-const localhost = "http://localhost:4000/api/products";
+const localhost = "http://localhost:4000";
 
 const withelist = ['http://localhost:5173']
 const corsOptions = {
@@ -64,5 +64,8 @@ app.use(router)
 
 //listen server
 app.listen(PORT, () => {
-  console.log(`Server on port:${localhost}`);
+  console.log(`Server on port:${localhost}/api/products`)
+  console.log(`Server on port:${localhost}/api/carts`)
+  console.log(`Server on port:${localhost}/api/users`)
+  console.log(`Server on port:${localhost}/api/tickets`)
 });

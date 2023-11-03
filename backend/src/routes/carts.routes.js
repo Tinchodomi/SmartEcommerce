@@ -1,18 +1,35 @@
-import { Router } from "express";
-import { getCartById, getCarts, postProductInCart, postEmptyCart, deleteProductInCart, putCart, putProductInCart } from "../controllers/carts.controller.js";
+import { Router } from 'express';
+import cartsController from '../controllers/carts.controller.js';
+import { authorization, passportError } from '../utils/messageErrors.js';
+const routerCart = Router();
 
-const cartRouter = Router();
-
-cartRouter.get("/", getCarts)
-cartRouter.get("/:id", getCartById);
-cartRouter.post("/", postEmptyCart);//crear nuevo carrito vacio
-cartRouter.post("/:cid/products/:pid", postProductInCart);
-cartRouter.delete("/:cid/products/:pid", deleteProductInCart);
-cartRouter.put("/:cid", putCart);
-cartRouter.put("/:cid/products/:pid", putProductInCart);
-
-
-
-
-
-export default cartRouter;
+routerCart.get('/', cartsController.getCarts);
+routerCart.get('/:cid', cartsController.getCart);
+routerCart.post('/:cid/purchase', cartsController.purchaseCart);
+routerCart.post('/', cartsController.postCart);
+routerCart.put(
+	'/:cid/product/:pid',
+	passportError('jwt'),
+	authorization('user'),
+	cartsController.putProductToCart
+);
+routerCart.put(
+	'/:cid/products/:pid',
+	passportError('jwt'),
+	authorization('user'),
+	cartsController.putQuantity
+);
+routerCart.put(
+	'/:cid',
+	passportError('jwt'),
+	authorization('user'),
+	cartsController.putProductsToCart
+);
+routerCart.delete('/:cid', passportError('jwt'), authorization('user'), cartsController.deleteCart);
+routerCart.delete(
+	'/:cid/products/:pid',
+	passportError('jwt'),
+	authorization('user'),
+	cartsController.deleteProductFromCart
+);
+export default routerCart;
