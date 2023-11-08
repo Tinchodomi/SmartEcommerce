@@ -5,8 +5,8 @@ const routerCart = Router();
 
 routerCart.get('/', cartsController.getCarts);
 routerCart.get('/:cid', cartsController.getCart);
-routerCart.post('/:cid/purchase', cartsController.purchaseCart);
 routerCart.post('/', cartsController.postCart);
+routerCart.post('/:cid/purchase', cartsController.purchaseCart);
 routerCart.put(
 	'/:cid/product/:pid',
 	passportError('jwt'),

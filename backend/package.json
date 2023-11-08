@@ -30,6 +30,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "devDependencies": {
+    "@faker-js/faker": "^8.2.0",
     "nodemon": "^3.0.1"
   },
   "scripts": {

@@ -27,27 +27,28 @@ const getCart = async (req, res) => {
 };
 
 const purchaseCart = async (req, res) => {
+
 	const { cid } = req.params;
 	try {
 		const cart = await cartModel.findById(cid);
 		const products = await productModel.find();
-
+		
 		if (cart) {
-			const user = await userModel.find({ cart: cart._id });
-			const email = user[0].email;
+
+			const {email} = req.body
+			
 			let amount = 0;
 			const purchaseItems = [];
 			cart.products.forEach(async item => {
 				const product = products.find(prod => prod._id == item.id_prod.toString());
 				if (product.stock >= item.quantity) {
-					amount += product.price * item.quantity;
-					product.stock -= item.quantity;
+					amount = product.price * item.quantity;
+					product.stock = product.stock - item.quantity;
 					await product.save();
 					purchaseItems.push(product.title);
 				}
-				//ticket?info=${amount}
+				
 			});
-			console.log(purchaseItems);
 			await cartModel.findByIdAndUpdate(cid, { products: [] });
 			res.redirect(
 				`http://localhost:4000/api/tickets/create?amount=${amount}&email=${email}`
@@ -59,6 +60,7 @@ const purchaseCart = async (req, res) => {
 		res.status(400).send({ error: `Error al consultar carrito: ${error}` });
 	}
 };
+
 
 const postCart = async (req, res) => {
 	//crear un carrito
