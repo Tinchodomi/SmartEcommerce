@@ -3,9 +3,9 @@ import { deleteProduct, getProduct, getProducts, postProduct ,putProduct } from 
 import {passportError, authorization} from '../utils/messageErrors.js'
 
 //Error handling
-import CustomError from '../services/errors/customError.js';
-import EErrors from '../services/errors/enums.js';
-import { generateProductErrorInfo } from "../services/errors/info.js";
+import CustomError from "../errors/CustomError.js";
+import EErrors from "../errors/Eerrors.js";
+import { generateProductErrorInfo } from "../errors/info.js";
 
 
 const productRouter = Router()

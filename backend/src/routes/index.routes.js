@@ -4,6 +4,7 @@ import productRouter from "./products.routes.js";
 import sessionRouter from "./sessions.routes.js";
 import userRouter from "./users.routes.js";
 import ticketRouter from "./tickets.routes.js";
+import routerMockingProducts from "./mockingproducts.routes.js";
 
 const router = Router()
 

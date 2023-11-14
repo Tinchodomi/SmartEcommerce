@@ -1,7 +1,5 @@
 import { faker } from "@faker-js/faker";
 
-
-
 const generateProducts = () => {
     return {
         title: faker.commerce.productName(),
