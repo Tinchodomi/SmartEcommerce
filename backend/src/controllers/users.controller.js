@@ -3,13 +3,12 @@ import userModel from "../models/users.model.js";
 export const getUsers = async (req,res)=>{
 
     const users = await userModel.find()
-
+    
     if (users) {
         return res.status(200).send(users)
     }
 
 }
-
 
 export const postUser = async( req,res)=>{
 
