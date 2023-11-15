@@ -4,6 +4,12 @@ import { passportError, authorization } from "../utils/messageErrors.js";
 import { generateToken } from "../utils/jwt.js";
 const sessionRouter = Router()
 
+
+import CustomError from '../services/errors/customError.js';
+import EErrors from '../services/errors/enums.js';
+import { generateUserErrorInfo } from "../services/errors/info.js";
+
+
 sessionRouter.post('/login', passport.authenticate('login'), async (req, res) => {
     try {
         if (!req.user) {
@@ -27,16 +33,22 @@ sessionRouter.post('/login', passport.authenticate('login'), async (req, res) =>
     }
 })
 
-sessionRouter.post('/register', passport.authenticate('register'), async (req, res) => {
+sessionRouter.post('/register', (req, res, next) => {
+    const { first_name, last_name, email } = req.body;
     try {
-        if (!req.user) {
-            return res.status(400).send({ mensaje: 'Usuario ya existente' })
+        if (!last_name || !first_name || !email) {
+            CustomError.createError({
+                name: "User creation error",
+                cause: generateUserErrorInfo({ first_name, last_name, email }),
+                message: "One or more properties were incomplete or not valid.",
+                code: EErrors.INVALID_USER_ERROR
+            });
         }
-        return res.status(200).send({ mensaje: 'Usuario creado' })
+        next();
     } catch (error) {
-        res.status(500).send({ mensaje: `Error al crear usuario ${error}` })
+        next(error);
     }
-})
+}, passport.authenticate('register'), register);
 
 sessionRouter.get('/testJWT', passport.authenticate('jwt', { session: true }), async (req, res) => {
     res.status(200).send({ mensaje: req.user })
