@@ -64,8 +64,11 @@ app.use(router)
 
 //listen server
 app.listen(PORT, () => {
+  console.log(`Server on port:${localhost}/api/users`)
   console.log(`Server on port:${localhost}/api/products`)
   console.log(`Server on port:${localhost}/api/carts`)
   console.log(`Server on port:${localhost}/api/users`)
   console.log(`Server on port:${localhost}/api/tickets`)
+  console.log(`Server on port:${localhost}/api/mockingproducts`)
+
 });
