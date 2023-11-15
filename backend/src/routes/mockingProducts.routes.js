@@ -10,4 +10,5 @@ routerMockingProducts.get("/", (req, res) => {
     res.json(products);
 });
 
+
 export default routerMockingProducts;
