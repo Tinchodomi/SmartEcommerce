@@ -1,9 +1,9 @@
 import userModel from "../models/users.model.js";
-
+import logger from "../utils/loggers.js";
 export const getUsers = async (req,res)=>{
 
     const users = await userModel.find()
-    
+    logger.info('Solicitaste todos los usuarios de la DB')
     if (users) {
         return res.status(200).send(users)
     }
