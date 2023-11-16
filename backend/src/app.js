@@ -11,6 +11,7 @@ import cors from 'cors'
 import initializePassport from "./config/passport.js";
 import cookieParser from "cookie-parser";
 import router from "./routes/index.routes.js";
+import logger from "./utils/loggers.js";
 
 
 //server
@@ -34,10 +35,10 @@ app.use(cors(corsOptions))
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
-    console.log("Mongo conectado");
+    logger.info('Conectado a Mongo DB')
   })
   .catch((err) => {
-    console.log("Error al conectarse a Mongo", err);
+   logger.info("Error al conectarse a Mongo", err);
   });
 
 app.use(express.json());
@@ -64,11 +65,11 @@ app.use(router)
 
 //listen server
 app.listen(PORT, () => {
-  console.log(`Server on port:${localhost}/api/users`)
-  console.log(`Server on port:${localhost}/api/products`)
-  console.log(`Server on port:${localhost}/api/carts`)
-  console.log(`Server on port:${localhost}/api/users`)
-  console.log(`Server on port:${localhost}/api/tickets`)
-  console.log(`Server on port:${localhost}/api/mockingproducts`)
+  logger.http(`${localhost}/api/users`);
+  logger.http(`${localhost}/api/products`)
+  logger.http(`${localhost}/api/carts`)
+  logger.http(`${localhost}/api/users`)
+  logger.http(`${localhost}/api/tickets`)
+  logger.http(`${localhost}/api/mockingproducts`)
 
 });
