@@ -16,7 +16,7 @@ const initializePassport = () => {
 
     const cookieExtractor = req => {
         const token = req.cookies ? req.cookies.jwtCookie : {}
-        console.log(token)
+        logger.info(token)
         return token
     }
 

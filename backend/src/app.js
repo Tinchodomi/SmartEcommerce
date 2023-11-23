@@ -6,6 +6,11 @@ import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import passport from "passport";
 import cors from 'cors'
+import cluster from 'cluster'
+import  {cpus} from "os";
+
+const procesadores = cpus().length
+//console.log(procesadores)
 
 //imports de modulos
 import initializePassport from "./config/passport.js";
