@@ -28,9 +28,9 @@ productRouter.post('/', (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}, passportError('jwt'), authorization(['admin']), postProduct);
-productRouter.put('/:id',passportError('jwt'), authorization(['admin']), putProduct)
-productRouter.delete('/:id',passportError('jwt'), authorization(['admin']), deleteProduct)
+}, passportError('jwt'), authorization('admin'), postProduct);
+productRouter.put('/:id',passportError('jwt'), authorization('admin'), putProduct)
+productRouter.delete('/:id',passportError('jwt'), authorization('admin'), deleteProduct)
 
 
 export default productRouter

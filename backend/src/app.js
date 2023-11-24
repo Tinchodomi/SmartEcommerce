@@ -6,8 +6,10 @@ import MongoStore from "connect-mongo";
 import mongoose from "mongoose";
 import passport from "passport";
 import cors from 'cors'
-import cluster from 'cluster'
 import  {cpus} from "os";
+import swaggerJsdoc from 'swagger-jsdoc'
+import swaggerUiExpress from 'swagger-ui-express'
+import { __dirname } from "./path.js";
 
 const procesadores = cpus().length
 //console.log(procesadores)
@@ -68,13 +70,31 @@ app.use(passport.session());
 //routes
 app.use(router)
 
+
+//swagger
+const options = {
+  definition: {
+    openapi: '3.1.0',
+    info: {
+      title: 'Documentacion Backend',
+      description:'API coderhouse backend'
+    },
+  },
+  apis: [`${__dirname}/docs/**/*.yaml`], // files containing annotations as above
+};
+
+const specs = swaggerJsdoc(options)
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+
+
+
 //listen server
 app.listen(PORT, () => {
   logger.http(`${localhost}/api/users`);
   logger.http(`${localhost}/api/products`)
   logger.http(`${localhost}/api/carts`)
-  logger.http(`${localhost}/api/users`)
   logger.http(`${localhost}/api/tickets`)
   logger.http(`${localhost}/api/mockingproducts`)
+  logger.http(`${localhost}/apidocs`)
 
 });

@@ -1,6 +1,7 @@
 
 import ticketModel from "../models/tickets.model.js";
 import { v4 as uuidv4 } from 'uuid';
+import userModel from "../models/users.model.js";
 
 const getTickets = async (req, res) => {
 	try {
@@ -12,8 +13,12 @@ const getTickets = async (req, res) => {
 	}
 };
 const createTicket = async (req, res) => {
-	const { amount, email } = req.query;
-	
+	let { amount, email, rol} = req.query;
+
+	if(rol == 'premium'){
+		let descuento = amount *0.15
+		amount = amount - descuento
+	}
 
 	try {
 		const ticket = {

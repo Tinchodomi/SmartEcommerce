@@ -4,13 +4,14 @@ import { getUsers, postUser } from "../controllers/users.controller.js";
 import { sendRecoveryEmail } from "../config/nodemailer.js";
 import crypto from "crypto";
 import logger from "../utils/loggers.js";
-
+import { getUser } from "../controllers/users.controller.js";
 
 const userRouter = Router();
 
 const recoveryLinks = {};
 
 userRouter.get("/", getUsers);
+userRouter.get('/:id', getUser)
 userRouter.post("/", passport.authenticate("register"), postUser);
 userRouter.post("/password-recovery", (req, res) => {
   const { email } = req.body;

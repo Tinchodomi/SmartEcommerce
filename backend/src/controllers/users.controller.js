@@ -10,6 +10,26 @@ export const getUsers = async (req,res)=>{
 
 }
 
+
+export const getUser = async (req,res)=>{
+
+  const { id } = req.params
+
+  try {
+    
+    const user = await userModel.findById(id)
+
+    if (user) {
+      return res.status(200).send(user)
+  }
+
+  res.status(404).send({ error: "User no encontrado" })
+
+} catch (error) {
+  res.status(500).send({ error: `Error en consultar user ${error}` })
+}
+}
+
 export const postUser = async( req,res)=>{
 
     try {
