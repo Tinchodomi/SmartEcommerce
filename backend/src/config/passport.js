@@ -5,6 +5,7 @@ import jwt from 'passport-jwt'
 import { createHash, validatePassword } from '../utils/bcrypt.js'
 import  userModel  from '../models/users.model.js'
 import 'dotenv/config'
+import logger from '../utils/loggers.js'
 
 //Defino la estrategia a utilizar
 const LocalStrategy = local.Strategy
@@ -37,7 +38,7 @@ const initializePassport = () => {
     passport.use('register', new LocalStrategy(
         { passReqToCallback: true, usernameField: 'email' }, async (req, username, password, done) => {
             //Defino como voy a registrar un user
-            const { first_name, last_name, email, age } = req.body
+            const { first_name, last_name, email, age, rol } = req.body
 
             try {
                 const user = await userModel.findOne({ email: email })
@@ -51,6 +52,7 @@ const initializePassport = () => {
                     last_name: last_name,
                     email: email,
                     age: age,
+                    rol:rol,
                     password: passwordHash
                 })
                 console.log(userCreated)

@@ -25,30 +25,31 @@ userRouter.post("/password-recovery", (req, res) => {
     res.status(500).send(`Error al recuperar contraseña`)
   }
 });
-export default userRouter;
-
 userRouter.post('/reset-password/:token', (req,res)=>{
-    const {token} = req.params
-    const {newPassword, oldPassword} = req.body
-
-    try {
-        
-        const linkData = recoveryLinks[token]
-        if(linkData && Date.now() - linkData.timestamp <= 3600000){
-            
-            const {email} = linkData
-            
-            logger.info(email)
-            logger.info(newPassword)
-            logger.info(oldPassword)
-
-            delete recoveryLinks[token]
-            res.status(200).send(`Contraseña modificada correctamente`)
-            
-        }else{
-            res.status(400).send(`Token invalido o expirado, intente nuevamente`)
-        }
-    } catch (error) {
-        res.status(400).send(`Error al cambiar contraseña`, error)
+  const {token} = req.params
+  const {newPassword, oldPassword} = req.body
+  
+  try {
+    
+    const linkData = recoveryLinks[token]
+    if(linkData && Date.now() - linkData.timestamp <= 3600000){
+      
+      const {email} = linkData
+      
+      logger.info(email)
+      logger.info(newPassword)
+      logger.info(oldPassword)
+      
+      delete recoveryLinks[token]
+      res.status(200).send(`Contraseña modificada correctamente`)
+      
+    }else{
+      res.status(400).send(`Token invalido o expirado, intente nuevamente`)
     }
+  } catch (error) {
+    res.status(400).send(`Error al cambiar contraseña`, error)
+  }
 })
+
+
+export default userRouter;

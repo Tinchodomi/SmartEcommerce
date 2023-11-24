@@ -13,6 +13,8 @@ const getTickets = async (req, res) => {
 };
 const createTicket = async (req, res) => {
 	const { amount, email } = req.query;
+	
+
 	try {
 		const ticket = {
 			code: uuidv4(),

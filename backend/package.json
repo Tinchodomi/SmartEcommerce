@@ -1,7 +1,6 @@
 {
   "type": "module",
   "dependencies": {
-    "animate.css": "^4.1.1",
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",

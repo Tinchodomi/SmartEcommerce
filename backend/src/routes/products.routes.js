@@ -13,6 +13,7 @@ const productRouter = Router()
 productRouter.get('/', getProducts)
 productRouter.get('/:id', getProduct)
 productRouter.post('/', (req, res, next) => {
+    
     const { title, description, price, stock, code, category } = req.body;
     try {
         if (!title || !description || !price || !stock || !code || !category) {
@@ -27,9 +28,9 @@ productRouter.post('/', (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}, passportError('jwt'), authorization('admin'), postProduct);
-productRouter.put('/:id',passportError('jwt'), authorization('admin'), putProduct)
-productRouter.delete('/:id',passportError('jwt'), authorization('admin'), deleteProduct)
+}, passportError('jwt'), authorization(['admin']), postProduct);
+productRouter.put('/:id',passportError('jwt'), authorization(['admin']), putProduct)
+productRouter.delete('/:id',passportError('jwt'), authorization(['admin']), deleteProduct)
 
 
 export default productRouter
