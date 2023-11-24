@@ -13,9 +13,11 @@ const getTickets = async (req, res) => {
 	}
 };
 const createTicket = async (req, res) => {
-	let { amount, email, rol} = req.query;
+	let { amount, email} = req.query;
 
-	if(rol == 'premium'){
+	const user = await userModel.findOne({email: email})
+
+	if(user.rol == 'premium'){
 		let descuento = amount *0.15
 		amount = amount - descuento
 	}
