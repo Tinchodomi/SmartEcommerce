@@ -32,7 +32,7 @@ export const authorization = (rol) => {
 
         //CICLO FOR PARA RECORRER EL ARRAY QUE CREAMOS CON LAS DISTINTAS FUNCIONES DE LOS USUARIOS
         for (let i = 0; i < rol.length; i++) {
-            if (req.user.rol === rol[i]) {
+            if (req.user.user.rol === rol[i]) {
                 return next() //Retorno next si el usuario tiene alguno de los roles que le pasamos por parametro
             }
         }

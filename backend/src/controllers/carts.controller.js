@@ -1,6 +1,6 @@
 import cartModel from '../models/carts.model.js';
 import productModel from '../models/products.model.js';
-
+import userModel from '../models/users.model.js'
 
 const getCarts = async (req, res) => {
 	//traer los carritos
@@ -29,13 +29,13 @@ const getCart = async (req, res) => {
 const purchaseCart = async (req, res) => {
 
 	const { cid } = req.params;
-	try {
-		const cart = await cartModel.findById(cid);
+	try { 
+		const cart = await cartModel.find({cart: cart._id});
 		const products = await productModel.find();
 		
 		if (cart) {
 
-			const {email} = req.body
+			const user = await userModel.find({cart:cart/_id})
 			
 			let amount = 0;
 			const purchaseItems = [];
