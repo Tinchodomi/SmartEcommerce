@@ -1,6 +1,6 @@
 import cartModel from '../models/carts.model.js';
 import productModel from '../models/products.model.js';
-import userModel from '../models/users.model.js';
+
 
 const getCarts = async (req, res) => {
 	//traer los carritos
@@ -117,10 +117,6 @@ const putQuantity = async (req, res) => {
 	const { quantity } = req.body;
 	const product = await productModel.findById(pid);
 
-	if (product.stock < productExists.quantity + quantity) {
-		res.status(400).send({ error: `No hay stock suficiente` });
-	}
-
 	try {
 		const cart = await cartModel.findById(cid);
 
@@ -142,7 +138,7 @@ const putQuantity = async (req, res) => {
 	}
 };
 const putProductsToCart = async (req, res) => {
-	// agregar varios producto al carrito
+	// agregar varios productos al carrito
 	const { cid } = req.params;
 	const { updateProducts } = req.body;
 

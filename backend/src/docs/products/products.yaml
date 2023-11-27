@@ -1,0 +1,82 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtener a todos los productos
+      tags: 
+        - Products
+      responses:
+        '200':
+          description: Productos obtenidos satisfactoriamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Products'
+        '500':
+          description: Error interno del servidor al obtener los productos
+  /api/products/{id}:
+    get:
+      summary: Obtener un solo producto dado su id
+      tags: 
+        - Product by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            $type: String
+          description: ID del producto a buscar
+      responses:
+        '200':
+          description: Producto obtenido satisfactoriamente
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Products'
+        '500':
+          description: Error interno del servidor al obtener los productos
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: Id autogenerado de MongoDB
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Modelo del producto
+        price:
+          type: String
+          description: Precio del producto
+        stock:
+          type: String
+          description: stock del producto
+        category:
+          type: String
+          description: categoria del producto
+        status:
+          type: Boolean
+          description: Estado del producto
+        code:
+          type: String
+          description: Codigo del producto
+        thumb:
+          type: Array
+          description: Imagen de producto
+      example:
+        _id: ObjectId('31a3123f2313e')
+        title: Apple
+        description: 15 pro
+        price: 2000
+        stock: 100
+        categoy: Alta
+        status: true
+        code: AAA155
+      
