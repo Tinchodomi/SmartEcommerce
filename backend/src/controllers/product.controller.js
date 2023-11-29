@@ -44,6 +44,16 @@ export const postProduct = async (req, res) => {
     const { title, description, code, price, stock, category } = req.body
 
     try {
+
+        if (!title || !description || !price || !stock || !code || !category) {
+            CustomError.createError({
+                name: "Product creation error",
+                cause: generateProductErrorInfo({ title, description, price, stock, code, category }),
+                message: "One or more properties were incomplete or not valid.",
+                code: EErrors.INVALID_PRODUCT_ERROR
+            })
+        }
+       
         const product = await productModel.create({ title, description, code, price, stock, category })
 
         if (product) {
@@ -53,12 +63,15 @@ export const postProduct = async (req, res) => {
         return res.status(404).send({ error: "Producto no encontrado" })
 
     } catch (error) {
+        
+        next(error)
+        
         if (error.code == 11000) {
             return res.status(400).send({ error: `Llave duplicada` })
         } else {
             return res.status(500).send({ error: `Error en consultar producto ${error}` })
         }
-
+        
     }
 }
 

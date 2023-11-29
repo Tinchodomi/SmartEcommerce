@@ -4,7 +4,7 @@ import "dotenv/config";
 //encriptar contraseña
 export const createHash = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(parseInt(process.env.SALT)));
-const hashPassword = createHash("coderhouse");
+//const hashPassword = createHash("coderhouse");
 //console.log(hashPassword)
 
 //validar contraseña
