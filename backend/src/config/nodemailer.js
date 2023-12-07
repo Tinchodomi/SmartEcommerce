@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendRecoveryEmail = (email, recoveryLink) =>{
     const emailOptions = {
-        from: 'TEST tincho tinchodomi@gmail.com',
+        from: 'TEST nodemailer',
         to: email,
         subjet:'Link de recuperar contraseña',
         text:`Por favor haz click en el siguiente enlace ${recoveryLink}`
