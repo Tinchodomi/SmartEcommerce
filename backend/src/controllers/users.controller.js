@@ -1,5 +1,6 @@
 import userModel from "../models/users.model.js";
 import logger from "../utils/loggers.js";
+
 export const getUsers = async (req, res) => {
   const users = await userModel.find();
   logger.info("Solicitaste todos los usuarios de la DB");
@@ -43,3 +44,6 @@ export const postUser = async (req, res) => {
     res.status(500).send({ mensaje: "Error al crear usuario " });
   }
 };
+
+
+

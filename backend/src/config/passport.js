@@ -73,6 +73,7 @@ const initializePassport = () => {
             }
 
             if (validatePassword(password, user.password)) {
+               
                 return done(null, user) //Usuario y contraseña validos
             }
 

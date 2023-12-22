@@ -3,14 +3,9 @@ import passport from "passport";
 import { getUsers, postUser } from "../controllers/users.controller.js";
 import { sendRecoveryEmail } from "../config/nodemailer.js";
 import crypto from "crypto";
-import logger from "../utils/loggers.js";
 import { getUser } from "../controllers/users.controller.js";
 import userModel from "../models/users.model.js";
 import { validatePassword ,createHash } from "../utils/bcrypt.js";
-import { hash } from "bcrypt";
-import { ifError } from "assert";
-import { error } from "console";
-
 
 const userRouter = Router();
 

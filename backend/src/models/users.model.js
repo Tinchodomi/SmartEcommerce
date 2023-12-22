@@ -33,7 +33,18 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "carts",
   },
+  last_connection: {
+    type: Date,
+    default: null,
+  },
+  documents: [
+    {
+      name: String,
+      reference: String,
+    },
+  ]
 });
+
 
 userSchema.pre("save", async function (next) {
   if (!this.cart) {
@@ -47,6 +58,8 @@ userSchema.pre("save", async function (next) {
     next();
   }
 });
+
+
 
 const userModel = model("users", userSchema);
 export default userModel;
