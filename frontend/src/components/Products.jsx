@@ -31,12 +31,11 @@ export const Products = () => {
         fetchProducts()
     }, [])
 
-
-
     return (
 
-        <><h1>Products</h1></>
-       /*  <div className="container row">
+        <>
+        <h1 className="h1">Products</h1>
+         <div className="container">
             {products.map(product =>
                 <div className="card" style={{ width: '18rem', margin: '5px' }}>
                     <div className="card-body">
@@ -48,8 +47,8 @@ export const Products = () => {
                         <button className="btn btn-secondary">Ver Producto</button>
                     </div>
                 </div>
-
             )}
-        </div> */
+        </div> 
+        </>
     )
 }

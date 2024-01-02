@@ -45,5 +45,40 @@ export const postUser = async (req, res) => {
   }
 };
 
+export const deleteUser = async (req,res)=>{
+
+    const { uid } = req.params
+
+    try {
+        const userID = await productModel.findByIdAndDelete(uid)
+
+        if (userID) {
+            return res.status(200).send(`usuario ${userID} eliminado con exito`)
+        }
+
+        res.status(404).send({ error: "user no encontrado" })
+
+    } catch (error) {
+        res.status(500).send({ error: `Error en eliminar user ${error}` })
+    }
+}
+
+
+export const cleanUp = async (req,res)=>{
+  
+  try {
+    const twoDaysAgo = new Date();
+    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+
+    // Eliminar usuarios que no han tenido conexión en los últimos 2 días
+    const result = await userModel.deleteMany({ last_connection: { $lt: twoDaysAgo } });
+
+    res.status(200).json({ message: `${result.deletedCount} usuarios eliminados` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al limpiar usuarios inactivos' });
+  }
+}; 
+
 
 

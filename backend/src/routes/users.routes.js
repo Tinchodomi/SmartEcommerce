@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { getUsers, postUser } from "../controllers/users.controller.js";
+import { cleanUp, deleteUser, getUsers, postUser } from "../controllers/users.controller.js";
 import { sendRecoveryEmail } from "../config/nodemailer.js";
 import crypto from "crypto";
 import { getUser } from "../controllers/users.controller.js";
@@ -14,6 +14,8 @@ const recoveryLinks = {};
 userRouter.get("/", getUsers);
 userRouter.get('/:id', getUser)
 userRouter.post("/", passport.authenticate("register"), postUser);
+userRouter.delete("/:uid", deleteUser)
+userRouter.delete('/', cleanUp)
 userRouter.post("/password-recovery", async (req, res) => {
   const { email } = req.body;
   try {

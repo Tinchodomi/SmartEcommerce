@@ -5,7 +5,6 @@ export const sessionLogin = async (req, res) => {
             return res.status(401).send({ mensaje: "Invalidate user" })
         }
         
-       
 
         req.session.user = {
             first_name: req.user.first_name,
@@ -15,7 +14,6 @@ export const sessionLogin = async (req, res) => {
             
         }
 
-        
         const token = generateToken(req.user)
         res.cookie('jwtCookie', token, {
             maxAge: 43200000
