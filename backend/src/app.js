@@ -10,9 +10,9 @@ import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
 import { __dirname } from "./path.js";
 import cookieParser from "cookie-parser";
+import mercadopago from 'mercadopago'
 
-
-//imports de own modules
+//imports de modulos propios
 import initializePassport from "./config/passport.js";
 import router from "./routes/index.routes.js";
 import logger from "./utils/loggers.js";
@@ -83,6 +83,57 @@ const options = {
 
 const specs = swaggerJsdoc(options)
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+
+
+//mercadopago
+
+// REPLACE WITH YOUR ACCESS TOKEN AVAILABLE IN: https://developers.mercadopago.com/panel
+mercadopago.configure({
+	access_token: "TEST-233070486310137-123009-55e5196ac7fcc6a7abc091e2e0f65257-14587990",
+});
+
+
+app.use(express.static("../../client/html-js"));
+app.use(cors());
+app.get("/", function (req, res) {
+	res.status(200).sendFile("index.html");
+});
+
+app.post("/create_preference", (req, res) => {
+
+	let preference = {
+		items: [
+			{
+				title: req.body.description,
+				unit_price: Number(req.body.price),
+				quantity: Number(req.body.quantity),
+			}
+		],
+		back_urls: {
+			"success": "http://localhost:4000/feedback",
+			"failure": "http://localhost:4000/feedback",
+			"pending": "http://localhost:4000/feedback"
+		},
+		auto_return: "approved",
+	};
+
+	mercadopago.preferences.create(preference)
+		.then(function (response) {
+			res.json({
+				id: response.body.id
+			});
+		}).catch(function (error) {
+			console.log(error);
+		});
+});
+
+app.get('/feedback', function (req, res) {
+	res.json({
+		Payment: req.query.payment_id,
+		Status: req.query.status,
+		MerchantOrder: req.query.merchant_order_id
+	});
+});
 
 
 //listen server

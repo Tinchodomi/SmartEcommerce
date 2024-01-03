@@ -7,9 +7,13 @@ import { Login } from './components/Login'
 import { Products } from './components/Products'
 import { Register } from './components/Register'
 import { NewProduct } from './components/NewProduct'
+import MercadoPago from './components/mercadoPago'
+
+
+
 
 function App() {
-  //const [count, setCount] = useState(0)
+  
 
   return (
     <>
@@ -20,6 +24,7 @@ function App() {
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/newproduct' element={<NewProduct/>}></Route>
         <Route path='*' element={<h1>404 Not Found</h1>}></Route>
+        <Route path='checkout' element={<MercadoPago/>}></Route>
       </Routes>
     </BrowserRouter>
     </>
