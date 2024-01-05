@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 
 export const Products = () => {
@@ -45,7 +46,8 @@ export const Products = () => {
                         <p className="card-text">{product.category}</p>
                         <p className="card-text">${product.price}</p>
                         <p className="card-text">{product.stock} Unidadades</p>
-                        <button className="btn btn-secondary">Ver Producto</button>
+                        <p className="card-text">{product._id}</p>
+                     <Link className="btn btn-secondary" to={'/checkout'}>Ver Producto</Link>
                     </div>
                 </div>
             )}

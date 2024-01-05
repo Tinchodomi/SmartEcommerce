@@ -23,8 +23,8 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/newproduct' element={<NewProduct/>}></Route>
-        <Route path='*' element={<h1>404 Not Found</h1>}></Route>
-        <Route path='checkout' element={<MercadoPago/>}></Route>
+        <Route path='*' element={<Products/>}></Route>
+        <Route path='/checkout' element={<MercadoPago/>}></Route>
       </Routes>
     </BrowserRouter>
     </>
