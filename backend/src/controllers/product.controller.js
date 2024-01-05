@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
     const fil = filter ? filter : {}
     const pag = page ? page : 1
     const lim = limit ? limit : 10
-    const ord = sort == 'asc' ? 1 : -1
+    const ord = sort == 'des' ? 1 : -1
     console.log(fil)
     try {
         const products = await productModel.paginate({}, { limit: lim, page: pag, sort: { price: ord } })
