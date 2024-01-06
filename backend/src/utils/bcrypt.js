@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-//import "dotenv/config";
+import "dotenv/config";
 
 //encriptar contraseña
 export const createHash = (password) =>
