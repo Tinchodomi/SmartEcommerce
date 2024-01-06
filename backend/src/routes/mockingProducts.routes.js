@@ -5,7 +5,7 @@ import loggers from "../utils/loggers.js";
 const routerMockingProducts = Router();
 
 routerMockingProducts.get("/", (req, res) => {
-    loggers.http('GET /mockingProducts');
+    loggers.http('GET /mockingproducts');
     const products = generateRandomProducts(100);
     res.json(products);
 });
