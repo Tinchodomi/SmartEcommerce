@@ -4,7 +4,7 @@ import productRouter from "./products.routes.js";
 import sessionRouter from "./sessions.routes.js";
 import userRouter from "./users.routes.js";
 import ticketRouter from "./tickets.routes.js";
-import mockingproducts from './mockingproducts.routes.js'
+//import mockingproducts from './mockingproducts.routes.js'
 
 const router = Router()
 
@@ -13,7 +13,7 @@ router.use('/api/users', userRouter)
 router.use('/api/carts', cartRouter)
 router.use('/api/sessions', sessionRouter)
 router.use('/api/tickets', ticketRouter);
-router.use('/api/mockingproducts', mockingproducts )
+//router.use('/api/mockingproducts', mockingproducts )
 
 
 
